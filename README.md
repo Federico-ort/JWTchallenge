@@ -1,1 +1,5 @@
 # JWTchallenge
+
+- express
+- mongoose
+- bcrypt
