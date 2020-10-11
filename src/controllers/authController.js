@@ -1,9 +1,18 @@
 const { Router } = require('express');
 const router = Router();
+const User = require('../User');
 
-router.post('/singup', (req, res, next) => {
+router.post('/singup', async (req, res, next) => {
     const { username, email, password } = req.body;
-    console.log(username, email, password);
+     const user = new User ({
+        username: username,
+        email: email,
+        password: password
+    })
+    user.password = await user.encryptPassword(user.password);
+    await user.save();
+    console.log("Guardado");
+    res.json({message: 'Exito'});
 });
 
 router.post('/singin', (req, res, next) => {
